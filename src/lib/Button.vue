@@ -27,7 +27,7 @@ export default {
 <style lang="scss">
 $h: 32px;
 $border-color: #d9d9d9;
-$color: #333;
+$color: #262626;
 $blue: #40a9ff;
 $radius: 4px;
 
@@ -63,6 +63,31 @@ $radius: 4px;
     //兼容firefox浏览器
     &::-moz-focus-inner {
         border: 0;
+    }
+
+    &.gulu-theme-link {
+        border-color: transparent;
+        box-shadow: none;
+        color: $blue;
+        transition: color .25s;
+
+        &:active {
+            color: #096dd9;
+
+        }
+
+    }
+
+    &.gulu-theme-text {
+        border-color: transparent;
+        box-shadow: none;
+        color: inherit;
+        transition: background .25s;
+
+        &:hover,
+        &:focus {
+            background: darken(white, 5%);
+        }
     }
 }
 </style>

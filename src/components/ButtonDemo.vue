@@ -1,8 +1,8 @@
 <template>
 <div>
-    <Button @click="onClick" @focus="onClick" @mouseenter="onClick">按钮</Button>
     <Button>按钮2</Button>
-    <Button>按钮2</Button>
+    <Button theme='text'>按钮</Button>
+    <Button theme='link'>按钮2</Button>
 </div>
 </template>
 
