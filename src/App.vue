@@ -10,7 +10,11 @@ import {
 export default {
     name: 'App',
     setup() {
-        const menuVisible = ref(false);
+        const {
+            clientWidth: width
+        } = document.documentElement
+
+        const menuVisible = ref(width > 500);
         provide('menuVisible', menuVisible);
     }
 }
