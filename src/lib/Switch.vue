@@ -30,6 +30,8 @@ button {
     border-radius: $h/2;
     position: relative;
     left: 0;
+    box-shadow: 0 0 0 10px rgba(30, 144, 255, 0);
+    transition: box-shadow .3s;
 }
 
 .checked {
@@ -53,10 +55,16 @@ span {
 
 button:focus {
     outline: none;
+
 }
 
 button:active>span {
     width: $h2+5px;
+}
+
+button:active {
+    transition: none;
+    box-shadow: 0 0 0 0 rgba(30, 144, 255, .5);
 }
 
 .checked:active>span {
