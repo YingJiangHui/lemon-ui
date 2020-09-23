@@ -5,7 +5,10 @@
 <script lang="ts">
 export default {
     props: {
-        value: Boolean
+        value: {
+            type: Boolean,
+            default: false
+        }
     },
     setup(props, context) {
         const toggle = () => {
@@ -26,12 +29,12 @@ button {
     height: $h;
     width: $h*2;
     border: none;
-    background: grey;
+    background: rgba(191, 191, 191);
     border-radius: $h/2;
     position: relative;
     left: 0;
-    box-shadow: 0 0 0 10px rgba(30, 144, 255, 0);
-    transition: box-shadow .3s;
+    box-shadow: 0 0 0 7px rgba(30, 144, 255, 0);
+    transition: box-shadow 500ms;
 }
 
 .checked {
