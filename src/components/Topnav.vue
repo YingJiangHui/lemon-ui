@@ -33,7 +33,8 @@ export default {
 <style lang="scss" scoped>
 .topnav {
     z-index: 10;
-    background: pink;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    background: #fff;
     display: flex;
     padding: 16px;
     justify-content: center;

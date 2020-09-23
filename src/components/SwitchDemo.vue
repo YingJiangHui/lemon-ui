@@ -1,9 +1,14 @@
 <template>
-<div>switch</div>
+    <Switch/>
 </template>
 
-<script>
-export default {
-    name: 'SwitchDemo'
-}
+<script lang="ts">
+    import Switch from '../lib/Switch.vue'
+
+    export default {
+        name: 'SwitchDemo',
+        components: {
+            Switch
+        }
+    }
 </script>
