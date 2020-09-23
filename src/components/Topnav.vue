@@ -32,13 +32,16 @@ export default {
 
 <style lang="scss" scoped>
 .topnav {
-    position: relative;
     z-index: 10;
     background: pink;
     display: flex;
     padding: 16px;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 
     >.logo {
         max-width: 6em;
