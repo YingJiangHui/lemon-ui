@@ -1,24 +1,36 @@
 <template>
-<button v-bind="rest" class="gulu-button" :class="{[`gulu-theme-${theme}`]:theme}">
-    <slot></slot>
+<button class="gulu-button" :class="classes">
+    <span class="gulu-text">
+        <slot></slot>
+    </span>
 </button>
 </template>
 
 <script lang="ts">
+import {
+    computed
+} from 'vue'
 export default {
     inheritAttrs: false,
     props: {
         theme: {
             default: 'button',
             type: String,
+        },
+        size: {
+            default: 'normal',
+            type: String
         }
     },
     setup(props, context) {
-        const {
-            ...rest
-        } = context.attrs
+        const classes = computed(() => {
+            return {
+                [`gulu-theme-${props.theme}`]: props.theme,
+                [`gulu-theme-${props.size}`]: props.size
+            }
+        })
         return {
-            rest
+            classes
         }
     }
 }
@@ -33,8 +45,7 @@ $radius: 4px;
 
 .gulu-button {
     box-sizing: border-box;
-    height: $h;
-    padding: 0 12px;
+    padding: 4px 15px;
     cursor: pointer;
     display: inline-flex;
     justify-content: center;
@@ -45,9 +56,14 @@ $radius: 4px;
     border: 1px solid $border-color;
     border-radius: $radius;
     box-shadow: 0 1px 0 fade-out(black, 0.95);
+    font-size: 14px;
 
     &+& {
         margin-left: 8px;
+    }
+
+    &>.gulu-text {
+        font-size: inherit;
     }
 
     &:hover,
@@ -88,6 +104,16 @@ $radius: 4px;
         &:focus {
             background: darken(white, 5%);
         }
+    }
+
+    &.gulu-theme-large {
+        font-size: 18px;
+        padding: 6px 18px;
+    }
+
+    &.gulu-theme-small {
+        font-size: 12px;
+        padding: 2px 12px;
     }
 }
 </style>
