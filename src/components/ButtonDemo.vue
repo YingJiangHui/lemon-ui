@@ -1,6 +1,7 @@
 <template>
 <div>
-    <Button size='small' @click="onClick" @focus="onClick" @mouseenter="onClick">按钮</Button>
+    <Button @click="onClick" @focus="onClick" @mouseenter="onClick">按钮</Button>
+    <Button>按钮2</Button>
 </div>
 </template>
 
