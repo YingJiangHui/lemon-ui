@@ -1,11 +1,11 @@
 <template>
 <div class="gulu-tabs-wrapper" :class="wrapperClasses">
     <div class="gulu-tabs-nav">
-        <div class="gulu-tabs-nav-item" :ref="el => { if(title===selected)navItem =el}" :class="navItemClasses(title)" v-for="(title) in titles" :key="title" @click="select(title)">{{title}}</div>
+        <div class="gulu-tabs-nav-item" :ref="el => { if(title===selected)navItem = el}" :class="navItemClasses(title)" v-for="(title) in titles" :key="title" @click="select(title)">{{title}}</div>
         <div class="gulu-tabs-indicator" ref="indicator"></div>
     </div>
     <div class="gulu-tabs-content">
-        <component class="gulu-tabs-content-item" :class="{'selected':slot.props.title===selected}" v-for="(slot,index) in defaults" :key='index' :is="slot" />
+        <component class="gulu-tabs-content-item" :key='current.props.title' :is="current" />
     </div>
 </div>
 </template>
@@ -16,6 +16,7 @@ import {
     onMounted,
     onUpdated,
     ref,
+    VNode,
     watchEffect,
 } from 'vue'
 import Tab from './Tab.vue'
@@ -32,8 +33,7 @@ export default {
     setup(props, context) {
         const navItem = ref < HTMLDivElement > (null)
         const indicator = ref < HTMLDivElement > (null)
-
-        const x = () => {
+        const moveIndicator = () => {
             const div = navItem.value
             const {
                 width,
@@ -49,27 +49,25 @@ export default {
                 indicator.value.style.top = top + 'px'
             }
         }
-
-        onMounted(() => {
-            watchEffect(x)
-        })
+        onMounted(moveIndicator)
+        onUpdated(moveIndicator)
         const disabledItem = context.slots.default().reduce((obj, tag) => {
             return tag.props['disabled'] ? {
                 ...obj,
                 [tag.props['title']]: true
             } : obj
         }, {})
+        const current = computed(() => context.slots.default().filter(tag => tag.props.title === props.selected)[0])
         const wrapperClasses = computed(() => {
             return {
                 [`gulu-direction-${props.direction}`]: props.direction
             }
         })
-        const navItemClasses = (title) => {
-            return {
-                [`gulu-tabs-nav-item-disabled`]: disabledItem[title],
-                ['selected']: title === props.selected
-            }
-        }
+        const navItemClasses = (title) => ({
+            [`gulu-tabs-nav-item-disabled`]: disabledItem[title],
+            ['selected']: title === props.selected
+        })
+
         const defaults = context.slots.default()
         context.slots.default().forEach((tag) => {
             if (tag.type !== Tab) {
@@ -80,9 +78,7 @@ export default {
             return tag.props.title
         })
         const select = (title: string) => {
-            // if (props.disabled) return
             if (Object.keys(disabledItem).indexOf(title) >= 0) return
-
             context.emit('update:selected', title)
         }
         return {
@@ -93,7 +89,8 @@ export default {
             indicator,
             wrapperClasses,
             disabledItem,
-            navItemClasses
+            navItemClasses,
+            current
         }
     }
 }
@@ -130,15 +127,7 @@ export default {
     }
 
     &>.gulu-tabs-content {
-        &>.gulu-tabs-content-item {
-            & {
-                display: none;
-            }
-
-            &.selected {
-                display: block;
-            }
-        }
+        &>.gulu-tabs-content-item {}
 
     }
 
