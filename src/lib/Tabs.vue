@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="gulu-tabs-nav">
-        <div class="gulu-tabs-nav-item" :ref="el => { if (el) navItems[index] = el }" :class="{'selected':title===selected}" v-for="(title,index) in titles" :key="title" @click="select(title)">{{title}}</div>
+        <div class="gulu-tabs-nav-item" :ref="el => { if(title===selected)navItem =el}" :class="{'selected':title===selected}" v-for="(title) in titles" :key="title" @click="select(title)">{{title}}</div>
         <div class="gulu-tabs-indicator" ref="indicator"></div>
     </div>
     <div class="gulu-tabs-content">
@@ -15,7 +15,8 @@ import {
     computed,
     onMounted,
     onUpdated,
-    ref
+    ref,
+    watchEffect,
 } from 'vue'
 import Tab from './Tab.vue'
 export default {
@@ -25,22 +26,23 @@ export default {
         }
     },
     setup(props, context) {
-        const navItems = ref < HTMLDivElement[] > ([])
+        const navItem = ref < HTMLDivElement > (null)
         const indicator = ref < HTMLDivElement > (null)
         const x = () => {
-            const divs = navItems.value
-            console.log(divs)
-            const result = divs.filter(div => div.classList.contains('selected'))[0]
+            const div = navItem.value
             const {
                 width
-            } = result.getBoundingClientRect()
-            const left1 = result.offsetLeft
+            } = div.getBoundingClientRect()
+            const left1 = div.offsetLeft
 
             indicator.value.style.width = width + 'px'
             indicator.value.style.left = left1 + 'px'
         }
-        onMounted(x)
-        onUpdated(x)
+
+        onMounted(() => {
+            watchEffect(x)
+        })
+
         const defaults = context.slots.default()
         context.slots.default().forEach((tag) => {
             if (tag.type !== Tab) {
@@ -57,7 +59,7 @@ export default {
             titles,
             defaults,
             select,
-            navItems,
+            navItem,
             indicator
         }
     }
