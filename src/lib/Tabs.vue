@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="gulu-tabs-wrapper" :class="wrapperClasses">
     <div class="gulu-tabs-nav">
         <div class="gulu-tabs-nav-item" :ref="el => { if(title===selected)navItem =el}" :class="{'selected':title===selected}" v-for="(title) in titles" :key="title" @click="select(title)">{{title}}</div>
         <div class="gulu-tabs-indicator" ref="indicator"></div>
@@ -20,29 +20,45 @@ import {
 } from 'vue'
 import Tab from './Tab.vue'
 export default {
+
     props: {
         selected: {
             type: String
+        },
+        direction: {
+            type: String,
+            default: 'horizontal'
         }
     },
     setup(props, context) {
         const navItem = ref < HTMLDivElement > (null)
         const indicator = ref < HTMLDivElement > (null)
+
         const x = () => {
             const div = navItem.value
             const {
-                width
+                width,
+                height
             } = div.getBoundingClientRect()
-            const left1 = div.offsetLeft
-
-            indicator.value.style.width = width + 'px'
-            indicator.value.style.left = left1 + 'px'
+            const left = div.offsetLeft
+            const top = div.offsetTop
+            if (props.direction === 'horizontal') {
+                indicator.value.style.width = width + 'px'
+                indicator.value.style.left = left + 'px'
+            } else if (props.direction === 'vertical') {
+                indicator.value.style.height = height + 'px'
+                indicator.value.style.top = top + 'px'
+            }
         }
 
         onMounted(() => {
             watchEffect(x)
         })
-
+        const wrapperClasses = computed(() => {
+            return {
+                [`gulu-direction-${props.direction}`]: props.direction
+            }
+        })
         const defaults = context.slots.default()
         context.slots.default().forEach((tag) => {
             if (tag.type !== Tab) {
@@ -60,45 +76,80 @@ export default {
             defaults,
             select,
             navItem,
-            indicator
+            indicator,
+            wrapperClasses
         }
     }
 }
 </script>
 
 <style lang="scss">
-.gulu-tabs-nav {
+.gulu-tabs-wrapper {
+
     display: flex;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    position: relative;
 
-    >.gulu-tabs-nav-item {
-        cursor: pointer;
-        padding: 0.4em 1em;
+    &>.gulu-tabs-nav {
+        display: flex;
+        position: relative;
 
-        &.selected {
-            color: #43ba85;
+        >.gulu-tabs-nav-item {
+            cursor: pointer;
+            padding: 0.4em 1em;
+
+            &.selected {
+                color: #43ba85;
+            }
+        }
+
+        >.gulu-tabs-indicator {
+
+            transition: .25s;
+            position: absolute;
+            background: #43ba85;
         }
     }
 
-    >.gulu-tabs-indicator {
-        transition: .25s;
-        height: 2px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #43ba85;
-    }
-}
+    &>.gulu-tabs-content {
 
-.gulu-tabs-content {
-    &>.gulu-tabs-content-item {
-        & {
-            display: none;
+        &>.gulu-tabs-content-item {
+            & {
+                display: none;
+            }
+
+            &.selected {
+                display: block;
+            }
         }
 
-        &.selected {
-            display: block;
+    }
+
+    &.gulu-direction-horizontal {
+        flex-direction: column;
+
+        &>.gulu-tabs-nav {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            flex-direction: row;
+
+            >.gulu-tabs-indicator {
+                height: 2px;
+                bottom: -1px;
+                left: 0;
+            }
+        }
+    }
+
+    &.gulu-direction-vertical {
+        flex-direction: row;
+
+        &>.gulu-tabs-nav {
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+
+            >.gulu-tabs-indicator {
+                width: 2px;
+                top: 0;
+                right: -1px;
+            }
         }
     }
 
