@@ -1,7 +1,7 @@
 <template>
 <div class="gulu-tabs-wrapper" :class="wrapperClasses">
     <div class="gulu-tabs-nav">
-        <div class="gulu-tabs-nav-item" :ref="el => { if(title===selected)navItem =el}" :class="{'selected':title===selected}" v-for="(title) in titles" :key="title" @click="select(title)">{{title}}</div>
+        <div class="gulu-tabs-nav-item" :ref="el => { if(title===selected)navItem =el}" :class="navItemClasses(title)" v-for="(title) in titles" :key="title" @click="select(title)">{{title}}</div>
         <div class="gulu-tabs-indicator" ref="indicator"></div>
     </div>
     <div class="gulu-tabs-content">
@@ -20,7 +20,6 @@ import {
 } from 'vue'
 import Tab from './Tab.vue'
 export default {
-
     props: {
         selected: {
             type: String
@@ -54,11 +53,23 @@ export default {
         onMounted(() => {
             watchEffect(x)
         })
+        const disabledItem = context.slots.default().reduce((obj, tag) => {
+            return tag.props['disabled'] ? {
+                ...obj,
+                [tag.props['title']]: true
+            } : obj
+        }, {})
         const wrapperClasses = computed(() => {
             return {
                 [`gulu-direction-${props.direction}`]: props.direction
             }
         })
+        const navItemClasses = (title) => {
+            return {
+                [`gulu-tabs-nav-item-disabled`]: disabledItem[title],
+                ['selected']: title === props.selected
+            }
+        }
         const defaults = context.slots.default()
         context.slots.default().forEach((tag) => {
             if (tag.type !== Tab) {
@@ -69,6 +80,9 @@ export default {
             return tag.props.title
         })
         const select = (title: string) => {
+            // if (props.disabled) return
+            if (Object.keys(disabledItem).indexOf(title) >= 0) return
+
             context.emit('update:selected', title)
         }
         return {
@@ -77,7 +91,9 @@ export default {
             select,
             navItem,
             indicator,
-            wrapperClasses
+            wrapperClasses,
+            disabledItem,
+            navItemClasses
         }
     }
 }
@@ -93,6 +109,10 @@ export default {
         position: relative;
 
         >.gulu-tabs-nav-item {
+            &.gulu-tabs-nav-item-disabled {
+                color: #dfdfdf;
+            }
+
             cursor: pointer;
             padding: 0.4em 1em;
 
@@ -110,7 +130,6 @@ export default {
     }
 
     &>.gulu-tabs-content {
-
         &>.gulu-tabs-content-item {
             & {
                 display: none;
