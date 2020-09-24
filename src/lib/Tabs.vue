@@ -1,19 +1,25 @@
 <template>
 <div>
     <div class="gulu-tabs-nav">
-        <div class="gulu-tabs-nav-item" v-for="t in titles" :key="t">{{t}}</div>
+        <div class="gulu-tabs-nav-item" :class="{'selected':title===selected}" v-for="title in titles" :key="title" @click="select(title)">{{title}}</div>
     </div>
     <div class="gulu-tabs-content">
-        <component class="gulu-tabs-content-item" v-for="(slot,index) in defaults" :key='index' :is="slot">
+        <component class="gulu-tabs-content-item" :class="{'selected':slot.props.title===selected}" v-for="(slot,index) in defaults" :key='index' :is="slot">
     </div>
 </div>
 </template>
 
-<script>
+<script lang="ts">
+import {
+    computed,
+    onUpdated
+} from 'vue'
 import Tab from './Tab.vue'
 export default {
     props: {
-
+        selected: {
+            type: String
+        }
     },
     setup(props, context) {
         const defaults = context.slots.default()
@@ -25,9 +31,13 @@ export default {
         const titles = context.slots.default().map(tag => {
             return tag.props.title
         })
+        const select = (title: string) => {
+            context.emit('update:selected', title)
+        }
         return {
             titles,
-            defaults
+            defaults,
+            select,
         }
     }
 }
@@ -46,5 +56,19 @@ export default {
             color: #43ba85;
         }
     }
+
+}
+
+.gulu-tabs-content {
+    &>.gulu-tabs-content-item {
+        & {
+            display: none;
+        }
+
+        &.selected {
+            display: block;
+        }
+    }
+
 }
 </style>
