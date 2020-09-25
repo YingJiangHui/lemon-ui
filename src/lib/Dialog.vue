@@ -1,9 +1,8 @@
 <template>
 <template v-if="visible">
-    <div class="gulu-dialog-overlay" @click="close"></div>
+    <div class="gulu-dialog-overlay" @click="onClickOverlay"></div>
     <div class="gulu-dialog-wrapper">
         <div class="gulu-dialog">
-
             <header>
                 <slot name="title"></slot>
                 <span class="gulu-dialog-close" @click="close"></span>
@@ -32,6 +31,10 @@ export default {
             type: Boolean,
             default: false
         },
+        closeOnClickOverlay: {
+            type: Boolean,
+            default: true
+        },
         yes: {
             type: Function,
         },
@@ -53,7 +56,12 @@ export default {
             close()
 
         }
+        const onClickOverlay = () => {
+            if (props.closeOnClickOverlay)
+                close()
+        }
         return {
+            onClickOverlay,
             close,
             ok,
             cancel

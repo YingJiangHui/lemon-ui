@@ -1,7 +1,7 @@
 <template>
 <div>
     <Button @click="visible=true">open dialog</Button>
-    <Dialog v-model:visible="visible" :yes="fn1" :no="fn2">
+    <Dialog v-model:visible="visible" :yes="fn1" :no="fn2" :closeOnClickOverlay="true">
         <template v-slot:title>
             标题
         </template>
