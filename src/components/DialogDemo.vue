@@ -39,7 +39,7 @@ export default {
         const open = () => {
             showDialog({
                 title: "标题",
-                constent: "内容一",
+                content: "内容一",
                 ok: fn1,
                 cancel: fn2,
                 closeOnClickOverlay: true
