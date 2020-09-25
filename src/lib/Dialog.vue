@@ -1,22 +1,24 @@
 <template>
-<div class="gulu-dialog-overlay"></div>
-<div class="gulu-dialog-wrapper">
-    <div class="gulu-dialog">
+<template v-if="visible">
+    <div class="gulu-dialog-overlay" @click="close"></div>
+    <div class="gulu-dialog-wrapper">
+        <div class="gulu-dialog">
 
-        <header>
-            <slot name="title"></slot>
-            <span class="gulu-dialog-close"></span>
-        </header>
+            <header>
+                <slot name="title"></slot>
+                <span class="gulu-dialog-close" @click="close"></span>
+            </header>
 
-        <main>
-            <slot name="content"></slot>
-        </main>
-        <footer>
-            <Button>OK</Button>
-            <Button level="danger">Cancel</Button>
-        </footer>
+            <main>
+                <slot name="content"></slot>
+            </main>
+            <footer>
+                <Button @click="ok">OK</Button>
+                <Button @click="cancel">Cancel</Button>
+            </footer>
+        </div>
     </div>
-</div>
+</template>
 </template>
 
 <script lang="ts">
@@ -24,6 +26,38 @@ import Button from './Button.vue'
 export default {
     components: {
         Button
+    },
+    props: {
+        visible: {
+            type: Boolean,
+            default: false
+        },
+        yes: {
+            type: Function,
+        },
+        no: {
+            type: Function
+        }
+    },
+    setup(props, context) {
+        const close = () => {
+            context.emit('update:visible', false)
+        }
+        const ok = () => {
+            if (props.yes?.()) {
+                close()
+            }
+        }
+        const cancel = () => {
+            props.no()
+            close()
+
+        }
+        return {
+            close,
+            ok,
+            cancel
+        }
     }
 }
 </script>
