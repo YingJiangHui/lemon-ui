@@ -1,15 +1,11 @@
 <template>
 <div class="topnav">
     <span class="toggleAside" v-if="toggleMenuButtonVisible" @click="toggleMenu">
-        <svg class="icon">
-            <use xlink:href="#icon-gengduo"></use>
-        </svg>
+        <Icon name="gengduo" />
     </span>
     <div class="logo">
         <router-link to="/">
-            <svg class="icon">
-                <use xlink:href="#icon-lemon"></use>
-            </svg>
+            <Icon name="lemon" />
         </router-link>
     </div>
     <ul class="menu">
@@ -21,11 +17,15 @@
 </template>
 
 <script lang="ts">
+import Icon from '../lib/Icon.vue'
 import {
     inject,
     Ref
 } from 'vue'
 export default {
+    components: {
+        Icon
+    },
     props: {
         toggleMenuButtonVisible: {
             type: Boolean,

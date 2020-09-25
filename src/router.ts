@@ -8,7 +8,7 @@ import DocDemo from './components/DocDemo.vue'
 import { createWebHashHistory, createRouter } from 'vue-router'
 import Install from './views/Install.vue'
 import Intro from './views/Intro.vue'
-import getStarted from './views/Get-started.vue'
+import getStarted from './views/GetStarted.vue'
 const hashHistory = createWebHashHistory()
 export const router = createRouter({
     history:hashHistory,

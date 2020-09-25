@@ -1,10 +1,9 @@
 <template>
-<article class="markdown-body" v-html="md">
-</article>
+<article class="markdown-body" v-html="md" />
 </template>
 
 <script>
-import md from '../markdown/install.md'
+import md from '../markdown/get-started.md'
 export default {
     setup() {
         return {
