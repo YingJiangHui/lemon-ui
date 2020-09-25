@@ -80,7 +80,9 @@ export default {
 }
 
 aside {
-    border-right: 1px solid rgba(0,0,0,.1);
+    z-index: 1;
+    background: #fff;
+    border-right: 1px solid rgba(0, 0, 0, .1);
     width: 150px;
     padding: 70px 16px 16px 16px;
     position: fixed;

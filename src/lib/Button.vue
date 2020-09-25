@@ -111,7 +111,7 @@ $warning:#f4bd00;
     }
 
     &.gulu-size-normal {
-        padding: 4px 14px;
+        padding: 6px 14px;
         font-size: 14px;
     }
 
@@ -121,7 +121,7 @@ $warning:#f4bd00;
     }
 
     &.gulu-size-small {
-        padding: 3px 12px;
+        padding: 4px 12px;
         font-size: 12px;
     }
 
