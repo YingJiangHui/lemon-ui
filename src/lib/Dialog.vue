@@ -1,22 +1,24 @@
 <template>
 <template v-if="visible">
-    <div class="gulu-dialog-overlay" @click="onClickOverlay"></div>
-    <div class="gulu-dialog-wrapper">
-        <div class="gulu-dialog">
-            <header>
-                <slot name="title"></slot>
-                <span class="gulu-dialog-close" @click="close"></span>
-            </header>
+    <teleport to='#app'>
+        <div class="gulu-dialog-overlay" @click="onClickOverlay"></div>
+        <div class="gulu-dialog-wrapper">
+            <div class="gulu-dialog">
+                <header>
+                    <slot name="title"></slot>
+                    <span class="gulu-dialog-close" @click="close"></span>
+                </header>
 
-            <main>
-                <slot name="content"></slot>
-            </main>
-            <footer>
-                <Button @click="ok">OK</Button>
-                <Button @click="cancel">Cancel</Button>
-            </footer>
+                <main>
+                    <slot name="content"></slot>
+                </main>
+                <footer>
+                    <Button @click="ok">OK</Button>
+                    <Button level="danger" :full="true" @click="cancel">Cancel</Button>
+                </footer>
+            </div>
         </div>
-    </div>
+    </teleport>
 </template>
 </template>
 
@@ -35,10 +37,10 @@ export default {
             type: Boolean,
             default: true
         },
-        yes: {
+        ok: {
             type: Function,
         },
-        no: {
+        cancel: {
             type: Function
         }
     },
@@ -47,12 +49,12 @@ export default {
             context.emit('update:visible', false)
         }
         const ok = () => {
-            if (props.yes?.()) {
+            if (props.ok?.()) {
                 close()
             }
         }
         const cancel = () => {
-            props.no()
+            props.cancel?.()
             close()
 
         }
