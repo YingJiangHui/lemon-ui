@@ -1,25 +1,26 @@
+<demo>
+常规用法
+</demo>
 <template>
 <div>
-    <Button @click="open">open dialog</Button>
+    <Button @click="open" level="primary" :full='true'>open dialog</Button>
 </div>
 </template>
 
 <script lang="ts">
-import Dialog from '../lib/Dialog.vue'
 import Button from '../lib/Button.vue'
 import {
     showDialog
 } from '../lib/dialog'
 import {
+    createApp,
     ref
 } from 'vue'
 export default {
     components: {
-        Dialog,
         Button
     },
     setup() {
-        const visible = ref(false)
         const ok = () => {
             console.log('ok')
             return true
@@ -28,17 +29,14 @@ export default {
             console.log('cancel')
         }
         const open = () => {
-            console.log(1)
             showDialog({
                 title: "标题",
-                content: "<strong>111</strong>",
+                content: "内容",
                 ok,
-                cancel,
-                closeOnClickOverlay: true
+                cancel
             })
         }
         return {
-            visible,
             open
         }
     }

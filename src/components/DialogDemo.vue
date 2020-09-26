@@ -1,12 +1,15 @@
 <template>
-<div>
-    <Button @click="open">open dialog</Button>
-</div>
+<component :is="DemoWrapper">
+    <component :is="Demo" :component="Dialog1Demo"></component>
+    <component :is="Demo" :component="Dialog2Demo"></component>
+</component>
 </template>
 
 <script lang="ts">
-import Dialog from '../lib/Dialog.vue'
-import Button from '../lib/Button.vue'
+import Dialog1Demo from './Dialog1.demo.vue'
+import Dialog2Demo from './Dialog2.demo.vue'
+import DemoWrapper from './DemoWrapper.vue'
+import Demo from './Demo.vue'
 import {
     showDialog
 } from '../lib/dialog'
@@ -14,31 +17,12 @@ import {
     ref
 } from 'vue'
 export default {
-    components: {
-        Dialog,
-        Button
-    },
     setup() {
-        const visible = ref(false)
-        const ok = () => {
-            console.log('ok')
-            return true
-        }
-        const cancel = () => {
-            console.log('cancel')
-        }
-        const open = () => {
-            showDialog({
-                title: "标题",
-                content: "<strong>111</strong>",
-                ok,
-                cancel,
-                closeOnClickOverlay: true
-            })
-        }
         return {
-            visible,
-            open
+            Dialog1Demo,
+            Dialog2Demo,
+            Demo,
+            DemoWrapper
         }
     }
 }

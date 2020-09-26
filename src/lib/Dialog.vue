@@ -77,14 +77,19 @@ export default {
 </script>
 
 <style lang="scss">
-$radius: 4px;
+$radius: 2px;
 $border-color: #d9d9d9;
 
 .gulu-dialog {
     background: white;
     box-shadow: 0 0 3px fade_out(black, 0.5);
-    min-width: 15em;
-    max-width: 90%;
+
+    width: 420px;
+    min-width: 300px;
+
+    @media (max-width:500px) {
+        width: 90vw;
+    }
 
     &-overlay {
         position: fixed;

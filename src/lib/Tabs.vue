@@ -65,9 +65,8 @@ export default {
         })
         const navItemClasses = (title) => ({
             [`gulu-tabs-nav-item-disabled`]: disabledItem[title],
-            ['selected']: title === props.selected
+            ['selected']: title === props.selected,
         })
-
         const defaults = context.slots.default()
         context.slots.default().forEach((tag) => {
             if (tag.type !== Tab) {
@@ -107,6 +106,7 @@ export default {
 
         >.gulu-tabs-nav-item {
             &.gulu-tabs-nav-item-disabled {
+                cursor: not-allowed;
                 color: #dfdfdf;
             }
 
@@ -126,13 +126,12 @@ export default {
         }
     }
 
-    &>.gulu-tabs-content {
-        &>.gulu-tabs-content-item {}
-
-    }
-
     &.gulu-direction-horizontal {
         flex-direction: column;
+
+        &>.gulu-tabs-content {
+            padding: 1em;
+        }
 
         &>.gulu-tabs-nav {
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -148,6 +147,10 @@ export default {
 
     &.gulu-direction-vertical {
         flex-direction: row;
+
+        &>.gulu-tabs-content {
+            padding: 0.4em 1em;
+        }
 
         &>.gulu-tabs-nav {
             border-right: 1px solid rgba(0, 0, 0, 0.1);

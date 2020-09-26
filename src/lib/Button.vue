@@ -170,7 +170,6 @@ $warning:#f4bd00;
             & {
                 background: #fff;
                 box-shadow: 0 0 0 6px rgba($primary, 0);
-
             }
 
             &:active {
@@ -178,15 +177,9 @@ $warning:#f4bd00;
                 box-shadow: 0 0 0 0 rgba($primary, 0.5);
             }
 
-            &:focus,
-            &:hover {
+            &:focus {
                 color: fade-out($color: $primary, $amount: 0);
                 border: 1px solid fade-out($color: $primary, $amount: 0.5);
-            }
-
-            &.gulu-button-full {
-                background: $primary;
-                color: #fff;
             }
         }
     }
@@ -203,25 +196,25 @@ $warning:#f4bd00;
             &.gulu-button-theme-button {
 
                 & {
-                    color: $level;
+                    color: fade-out($color: $level, $amount: .1);
                     background: #fff;
                     box-shadow: 0 0 0 6px rgba($level, 0);
-                    border: 1px solid fade-out($color: $level, $amount: 0.5);
+                    border: 1px solid fade-out($color: $level, $amount: .1);
                 }
 
                 &:active {
+                    color: $level;
                     transition: none;
                     box-shadow: 0 0 0 0 rgba($level, 0.5);
                 }
 
-                &:focus,
-                &:hover {
-                    color: fade-out($color: $level, $amount: 0);
+                &.gulu-button-full {
+                    background: fade-out($color: $level, $amount: .1);
+                    color: #fff;
                 }
 
-                &.gulu-button-full {
+                &.gulu-button-full:active {
                     background: $level;
-                    color: #fff;
                 }
             }
 

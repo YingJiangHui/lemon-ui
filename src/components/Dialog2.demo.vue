@@ -1,55 +1,43 @@
+<demo>
+设置点击遮罩层不关闭对话框
+</demo>
 <template>
 <div>
-    <Button @click="open">open dialog</Button>
-    <Dialog v-model:visible="visible" :yes="fn1" :no="fn2" :closeOnClickOverlay="true">
-        <template v-slot:title>
-            标题
-        </template>
-        <template v-slot:content>
-            <p>一行内容</p>
-            <p>两行内容</p>
-        </template>
-    </Dialog>
+    <Button @click="open" level="primary" :full='true'>open dialog</Button>
 </div>
 </template>
 
 <script lang="ts">
-import Dialog from '../lib/Dialog.vue'
 import Button from '../lib/Button.vue'
 import {
     showDialog
 } from '../lib/dialog'
 import {
+    createApp,
     ref
 } from 'vue'
 export default {
     components: {
-        Dialog,
         Button
     },
     setup() {
-        const visible = ref(false)
-        const fn1 = () => {
-            console.log('fn1')
+        const ok = () => {
+            console.log('ok')
             return true
         }
-        const fn2 = () => {
-            console.log('fn2')
+        const cancel = () => {
+            console.log('cancel')
         }
         const open = () => {
             showDialog({
                 title: "标题",
-                content: "内容一",
-                ok: fn1,
-                cancel: fn2,
-                closeOnClickOverlay: true
+                content: "内容",
+                ok,
+                cancel,
+                closeOnClickOverlay: false
             })
         }
         return {
-            visible,
-            fn1,
-            fn2,
-            showDialog,
             open
         }
     }

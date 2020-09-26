@@ -1,33 +1,25 @@
 <template>
-<div>
-
-    <Tabs v-model:selected="x" direction="vertical">
-        <Tab title='导航1'>内容1</Tab>
-        <Tab title='导航2' :disabled='true'>内容2</Tab>
-        <Tab title='导航5' :disabled='true'>内容5</Tab>
-
-        <Tab title='导航3'>内容3</Tab>
-    </Tabs>
-</div>
+<component :is="DemoWrapper">
+    <component :is="Demo" :component="Tabs1Demo" />
+    <component :is="Demo" :component="Tabs2Demo" />
+    <component :is="Demo" :component="Tabs3Demo" />
+</component>
 </template>
 
 <script lang="ts">
-import {
-    computed,
-    onUpdated,
-    ref
-} from 'vue'
-import Tab from '../lib/Tab.vue'
-import Tabs from '../lib/Tabs.vue'
+import Tabs1Demo from './Tabs1Demo.vue'
+import Tabs2Demo from './Tabs2Demo.vue'
+import Tabs3Demo from './Tabs3Demo.vue'
+import Demo from './Demo.vue'
+import DemoWrapper from './DemoWrapper.vue'
 export default {
-    components: {
-        Tab,
-        Tabs
-    },
     setup() {
-        let x = ref('导航1')
         return {
-            x
+            Tabs1Demo,
+            Tabs2Demo,
+            Tabs3Demo,
+            Demo,
+            DemoWrapper
         }
     }
 }
