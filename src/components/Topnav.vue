@@ -1,6 +1,6 @@
 <template>
 <div class="topnav">
-    <span class="toggleAside" v-if="toggleMenuButtonVisible" @click="toggleMenu">
+    <span class="toggleAside" v-if="toggleMenuButtonVisible" @click="toggleMenu" ref="iconWrapper">
         <Icon name="gengduo" />
     </span>
     <div class="logo">
@@ -20,7 +20,12 @@
 import Icon from '../lib/Icon.vue'
 import {
     inject,
-    Ref
+    Ref,
+    watchEffect,
+    watch,
+    onMounted,
+    onUpdated,
+    ref
 } from 'vue'
 export default {
     components: {
@@ -34,14 +39,38 @@ export default {
     },
     setup() {
         const menuVisible = inject < Ref < boolean >> ('menuVisible')
+        const iconWrapper = ref < HTMLSpanElement > (null)
+        const asideRef = inject < Ref < HTMLDivElement >> ('asideRef')
 
         function toggleMenu() {
             menuVisible.value = !menuVisible.value
         }
+        watch(menuVisible, (count, prevCount) => {
+            if (count) {
+                document.addEventListener('click', onDocumentClick)
+            } else {
+                document.removeEventListener('click', onDocumentClick)
+            }
+        })
+
+        const onDocumentClick = (e) => {
+            if (iconWrapper.value.contains(e.target) || e.target === asideRef.value) return
+            close()
+        }
+
+        const open = () => {
+            menuVisible.value = true
+        }
+
+        const close = () => {
+            menuVisible.value = false
+        }
         return {
-            toggleMenu
+            toggleMenu,
+            iconWrapper
         }
     }
+
 }
 </script>
 
@@ -52,6 +81,8 @@ export default {
     padding: 16px;
     align-items: center;
     position: fixed;
+    background: #fff;
+    border-bottom: 1px solid rgb(0, 0, 0, .1);
     top: 0;
     left: 0;
     width: 100%;
@@ -78,6 +109,7 @@ export default {
     }
 
     >.toggleAside {
+        cursor: pointer;
         width: 30px;
         height: 30px;
         display: none;

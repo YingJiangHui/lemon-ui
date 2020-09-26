@@ -2,7 +2,7 @@
 <div class="layout">
     <Topnav class="nav" :toggleMenuButtonVisible='true' />
     <div class="content">
-        <aside v-if="menuVisible">
+        <aside v-if="menuVisible" ref='asideRef'>
             <h2>文档</h2>
             <ol>
                 <li>
@@ -49,9 +49,11 @@ export default {
         Topnav
     },
     setup() {
+        const asideRef = inject < Ref < HTMLDivElement >> ('asideRef')
         const menuVisible = inject < Ref < boolean >> ('menuVisible')
         return {
-            menuVisible
+            menuVisible,
+            asideRef
         }
     }
 }
