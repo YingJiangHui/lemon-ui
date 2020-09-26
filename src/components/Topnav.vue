@@ -58,10 +58,6 @@ export default {
             close()
         }
 
-        const open = () => {
-            menuVisible.value = true
-        }
-
         const close = () => {
             menuVisible.value = false
         }
