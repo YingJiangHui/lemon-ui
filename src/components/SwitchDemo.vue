@@ -1,7 +1,6 @@
 <template>
 <div class="demo-wrapper">
     <h1>Swtich 组件示例</h1>
-
     <div class="demo">
         <p>常规用法</p>
         <div class="demo-component">
@@ -11,9 +10,7 @@
         <div class="demo-actions">
             <Button @click="toggle">查看代码</Button>
         </div>
-        <div class="demo-code" v-if="codeVisible">
-            ...
-        </div>
+        <pre class="demo-code" v-if="codeVisible">{{SwitchDemo1.__sourceCode}}</pre>
     </div>
 </div>
 </template>
@@ -36,7 +33,8 @@ export default {
         }
         return {
             codeVisible,
-            toggle
+            toggle,
+            SwitchDemo1
         }
     }
 }

@@ -1,3 +1,6 @@
+<demo>
+常规用法
+</demo>
 <template>
 <Switch v-model:value="bool" :disabled="disabled" />
 <Button level="primary" :full="true" @click="disabled=!disabled">Toggle disabled</Button>
