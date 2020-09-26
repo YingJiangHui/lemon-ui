@@ -8,7 +8,7 @@
         <Button @click="toggle">查看代码</Button>
     </div>
     <div class="demo-code" v-if="codeVisible">
-        <pre class="language-html" v-html="highlight"></pre>
+        <pre class="language-html" v-html="html"></pre>
     </div>
 </div>
 </template>
@@ -38,13 +38,14 @@ export default {
             codeVisible.value = !codeVisible.value
         }
 
-        const highlight = computed(() => {
+        const html = computed(() => {
             return Prism.highlight(props.component.__sourceCode, Prism.languages.html, 'html')
         })
         return {
             codeVisible,
             toggle,
-            Prism
+            Prism,
+            html
         }
     }
 }
