@@ -1,10 +1,10 @@
 <template>
 <div>
+    <component :is="Demo" :component="Button1Demo" />
     <div class="box">
         <Button size="large">按钮</Button>
         <Button size="normal">按钮</Button>
         <Button size="small">按钮</Button>
-
     </div>
     <div class="box">
         <Button theme='text' size="large">按钮</Button>
@@ -47,6 +47,8 @@
 
 <script lang="ts">
 import Button from '../lib/Button.vue'
+import Button1Demo from './Button1.demo.vue'
+import Demo from './Demo.vue'
 export default {
     components: {
         Button
@@ -56,7 +58,9 @@ export default {
             console.log('hi')
         }
         return {
-            onClick
+            onClick,
+            Button1Demo,
+            Demo
         }
     }
 }

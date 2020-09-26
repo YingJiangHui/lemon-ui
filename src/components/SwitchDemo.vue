@@ -1,77 +1,29 @@
 <template>
-<div class="demo-wrapper">
-    <h1>Swtich 组件示例</h1>
-    <div class="demo">
-        <p>常规用法</p>
-        <div class="demo-component">
-            <component :is="SwitchDemo1" />
-        </div>
-        <div class="demo-actions">
-            <Button @click="toggle">查看代码</Button>
-        </div>
-        <div class="demo-code" v-if="codeVisible">
-            <pre class="language-html" v-html="Prism.highlight(SwitchDemo1.__sourceCode, Prism.languages.html, 'html')"></pre>
-        </div>
-    </div>
-</div>
+<component :is="DemoWrapper">
+    <component :is="Demo" :component="Switch1Demo" />
+    <component :is="Demo" :component="Switch2Demo" />
+    <component :is="Demo" :component="Switch3Demo" />
+</component>
 </template>
 
 <script lang="ts">
-import SwitchDemo1 from './Switch.demo1.vue'
-import Button from '../lib/Button.vue'
-import Prism from 'prismjs';
-import '../../node_modules/prismjs/themes/prism.css'
+import Demo from './Demo.vue'
+import DemoWrapper from './DemoWrapper.vue'
+import Switch1Demo from './Switch1.demo.vue'
+import Switch2Demo from './Switch2.demo.vue'
+import Switch3Demo from './Switch3.demo.vue'
 import {
     ref
 } from 'vue'
 export default {
-    components: {
-        Button
-    },
     setup() {
-        const codeVisible = ref < boolean > (false)
-        const toggle = () => {
-            codeVisible.value = !codeVisible.value
-        }
         return {
-            codeVisible,
-            toggle,
-            SwitchDemo1,
-            Prism
+            Demo,
+            Switch1Demo,
+            Switch2Demo,
+            Switch3Demo,
+            DemoWrapper
         }
     }
 }
 </script>
-
-<style lang="scss">
-.demo-wrapper {
-    padding: 45px;
-    margin: 0 auto;
-    max-width: 890px;
-
-    @media (max-width:500px) {
-        padding: 0;
-    }
-
-    >.demo {
-        min-width: 320px;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid rgba($color: #000, $alpha: .1);
-
-        &>*:not(:last-child) {
-            border-bottom: 1px solid rgba($color: #000, $alpha: .1);
-        }
-
-        &>* {
-            padding: 1em;
-        }
-
-        >.demo-component {}
-
-        >.demo-actions {}
-
-        >.demo-code {}
-    }
-}
-</style>
