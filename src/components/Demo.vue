@@ -8,7 +8,7 @@
         <Button @click="toggle">查看代码</Button>
     </div>
     <div class="demo-code" v-if="codeVisible">
-        <pre class="language-html" v-html="Prism.highlight(component.__sourceCode, Prism.languages.html, 'html')"></pre>
+        <pre class="language-html" v-html="highlight"></pre>
     </div>
 </div>
 </template>
@@ -18,6 +18,7 @@ import Button from '../lib/Button.vue'
 import Prism from 'prismjs';
 import '../../node_modules/prismjs/themes/prism.css'
 import {
+    computed,
     ref,
 } from 'vue'
 export default {
@@ -31,11 +32,15 @@ export default {
     components: {
         Button
     },
-    setup() {
+    setup(props) {
         const codeVisible = ref < boolean > (false)
         const toggle = () => {
             codeVisible.value = !codeVisible.value
         }
+
+        const highlight = computed(() => {
+            return Prism.highlight(props.component.__sourceCode, Prism.languages.html, 'html')
+        })
         return {
             codeVisible,
             toggle,
@@ -59,11 +64,5 @@ export default {
     &>* {
         padding: 1em;
     }
-
-    >.demo-component {}
-
-    >.demo-actions {}
-
-    >.demo-code {}
 }
 </style>

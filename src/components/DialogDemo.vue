@@ -1,5 +1,6 @@
 <template>
 <component :is="DemoWrapper">
+    <h2>Dialog示例</h2>
     <component :is="Demo" :component="Dialog1Demo"></component>
     <component :is="Demo" :component="Dialog2Demo"></component>
 </component>

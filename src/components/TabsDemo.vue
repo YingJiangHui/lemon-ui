@@ -1,5 +1,6 @@
 <template>
 <component :is="DemoWrapper">
+    <h2>Tabs示例</h2>
     <component :is="Demo" :component="Tabs1Demo" />
     <component :is="Demo" :component="Tabs2Demo" />
     <component :is="Demo" :component="Tabs3Demo" />

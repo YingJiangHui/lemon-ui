@@ -144,11 +144,12 @@ $warning:#f4bd00;
     }
 
     &.gulu-button-theme-link {
-        & {
-            transition: color .25s;
-            color: $primary;
-        }
+        transition: color .25s;
+        color: $primary;
+    }
 
+    &.gulu-button-theme-link:active {
+        color: fade-out($color: $primary, $amount: .5);
     }
 
     &>.gulu-button-loading-icon {
