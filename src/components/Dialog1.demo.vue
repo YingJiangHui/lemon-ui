@@ -28,6 +28,7 @@ export default {
             console.log('cancel')
         }
         const open = () => {
+            console.log(1)
             showDialog({
                 title: "标题",
                 content: "<strong>111</strong>",

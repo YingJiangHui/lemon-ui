@@ -2,8 +2,8 @@
 修改大小
 </demo>
 <template>
-<Switch v-model:value="bool" />
-<Switch v-model:value="bool" size="small" />
+<Switch v-model:value="bool1" />
+<Switch v-model:value="bool2" size="small" />
 </template>
 
 <script lang="ts">
@@ -17,9 +17,12 @@ export default {
         Switch
     },
     setup() {
-        const bool = ref(false)
+        const bool1 = ref(false)
+        const bool2 = ref(false)
+
         return {
-            bool,
+            bool1,
+            bool2,
         }
     }
 }

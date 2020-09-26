@@ -47,7 +47,7 @@ export default {
 
 <style lang="scss">
 .demo {
-    min-width: 320px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     border: 1px solid rgba($color: #000, $alpha: .1);

@@ -1,10 +1,10 @@
 <demo>
-常规用法
+link主题
 </demo>
 <template>
-<Button size="large">按钮</Button>
-<Button size="normal">按钮</Button>
-<Button size="small">按钮</Button>
+<Button theme='link' size="large">按钮</Button>
+<Button theme='link' size="normal">按钮</Button>
+<Button theme='link' size="small">按钮</Button>
 </template>
 
 <script lang="ts">

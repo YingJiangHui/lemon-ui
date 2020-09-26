@@ -1,7 +1,7 @@
 <template>
 <template v-if="visible">
     <teleport to='#app'>
-        <div class="gulu-dialog-overlay" @click="onClickOverlay"></div>
+        <div class="gulu-dialog-overlay" :style="{borderRadius:radius+'px'}" @click="onClickOverlay"></div>
         <div class="gulu-dialog-wrapper">
             <div class="gulu-dialog">
                 <header>
@@ -13,8 +13,8 @@
                     <slot name="content"></slot>
                 </main>
                 <footer>
-                    <Button @click="ok">OK</Button>
-                    <Button level="danger" :full="true" @click="cancel">Cancel</Button>
+                    <Button @click="cancel">Cancel</Button>
+                    <Button level="primary" :full="true" @click="ok">OK</Button>
                 </footer>
             </div>
         </div>
@@ -42,6 +42,10 @@ export default {
         },
         cancel: {
             type: Function
+        },
+        radius: {
+            type: [String, Number],
+            default: 0
         }
     },
     setup(props, context) {
@@ -78,7 +82,6 @@ $border-color: #d9d9d9;
 
 .gulu-dialog {
     background: white;
-    border-radius: $radius;
     box-shadow: 0 0 3px fade_out(black, 0.5);
     min-width: 15em;
     max-width: 90%;

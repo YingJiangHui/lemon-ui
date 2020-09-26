@@ -1,6 +1,15 @@
 <template>
 <div>
     <Button @click="open">open dialog</Button>
+    <Dialog v-model:visible="visible" :yes="fn1" :no="fn2" :closeOnClickOverlay="true">
+        <template v-slot:title>
+            标题
+        </template>
+        <template v-slot:content>
+            <p>一行内容</p>
+            <p>两行内容</p>
+        </template>
+    </Dialog>
 </div>
 </template>
 
@@ -20,24 +29,27 @@ export default {
     },
     setup() {
         const visible = ref(false)
-        const ok = () => {
-            console.log('ok')
+        const fn1 = () => {
+            console.log('fn1')
             return true
         }
-        const cancel = () => {
-            console.log('cancel')
+        const fn2 = () => {
+            console.log('fn2')
         }
         const open = () => {
             showDialog({
                 title: "标题",
-                content: "<strong>111</strong>",
-                ok,
-                cancel,
+                content: "内容一",
+                ok: fn1,
+                cancel: fn2,
                 closeOnClickOverlay: true
             })
         }
         return {
             visible,
+            fn1,
+            fn2,
+            showDialog,
             open
         }
     }
