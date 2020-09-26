@@ -1,5 +1,5 @@
 <template>
-<Switch v-model:value="bool" size='small' :disabled="disabled" />
+<Switch v-model:value="bool" :disabled="disabled" />
 <Button level="primary" :full="true" @click="disabled=!disabled">Toggle disabled</Button>
 </template>
 
