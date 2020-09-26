@@ -4,13 +4,14 @@
     <div class="demo">
         <p>常规用法</p>
         <div class="demo-component">
-            <switch-demo-1></switch-demo-1>
-
+            <component :is="SwitchDemo1" />
         </div>
         <div class="demo-actions">
             <Button @click="toggle">查看代码</Button>
         </div>
-        <pre class="demo-code" v-if="codeVisible">{{SwitchDemo1.__sourceCode}}</pre>
+        <div class="demo-code" v-if="codeVisible">
+            <pre class="language-html" v-html="Prism.highlight(SwitchDemo1.__sourceCode, Prism.languages.html, 'html')"></pre>
+        </div>
     </div>
 </div>
 </template>
@@ -18,12 +19,13 @@
 <script lang="ts">
 import SwitchDemo1 from './Switch.demo1.vue'
 import Button from '../lib/Button.vue'
+import Prism from 'prismjs';
+import '../../node_modules/prismjs/themes/prism.css'
 import {
     ref
 } from 'vue'
 export default {
     components: {
-        SwitchDemo1,
         Button
     },
     setup() {
@@ -34,7 +36,8 @@ export default {
         return {
             codeVisible,
             toggle,
-            SwitchDemo1
+            SwitchDemo1,
+            Prism
         }
     }
 }
