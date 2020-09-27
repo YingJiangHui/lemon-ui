@@ -1,7 +1,7 @@
 <template>
 <div class="gulu-tabs-wrapper" :class="wrapperClasses">
     <div class="gulu-tabs-nav">
-        <div class="gulu-tabs-nav-item" :ref="el => { if(title===selected)navItem = el}" :class="navItemClasses(title)" v-for="(title) in titles" :key="title" @click="select(title)">{{title}}</div>
+        <div class="gulu-tabs-nav-item" :ref="el => { if(title===selected) navItem = el}" :class="navItemClasses(title)" v-for="(title) in titles" :key="title" @click="select(title)">{{title}}</div>
         <div class="gulu-tabs-indicator" ref="indicator"></div>
     </div>
     <div class="gulu-tabs-content">
@@ -31,8 +31,21 @@ export default {
         }
     },
     setup(props, context) {
+        const wrapperClasses = computed(() => ({
+            [`gulu-direction-${props.direction}`]: props.direction
+        }))
+        const navItemClasses = (title) => ({
+            [`gulu-tabs-nav-item-disabled`]: disabledItem[title],
+            ['selected']: title === props.selected,
+        })
+        context.slots.default().forEach((tag) => {
+            if (tag.type !== Tab) {
+                throw new Error('Tabs的子组件必须是Tab组件')
+            }
+        })
         const navItem = ref < HTMLDivElement > (null)
         const indicator = ref < HTMLDivElement > (null)
+
         const moveIndicator = () => {
             const div = navItem.value
             const {
@@ -49,37 +62,29 @@ export default {
                 indicator.value.style.top = top + 'px'
             }
         }
-        onMounted(moveIndicator)
-        onUpdated(moveIndicator)
-        const disabledItem = context.slots.default().reduce((obj, tag) => {
-            return tag.props['disabled'] ? {
+        // 默认watchEffect会在组件渲之前查看依赖的属性是否发生变化。
+        // 而代码中的依赖navItem是需要在组件渲染之后才会发生变化，
+        // 因此watchEffect在组件渲染之前查看却发现依赖没有变化导致不执行watchEffect函数。
+        // 将watchEffect传入第二个参数flush改为post表示只有在组件渲染之后watchEffect再进行查看即可。
+        // 默认flush:pre
+        onMounted(() => {
+            watchEffect(moveIndicator, {
+                flush: 'post'
+            })
+        })
+        const disabledItem = context.slots.default().reduce((obj, tag) =>
+            tag.props['disabled'] ? {
                 ...obj,
                 [tag.props['title']]: true
-            } : obj
-        }, {})
+            } : obj, {})
         const current = computed(() => context.slots.default().filter(tag => tag.props.title === props.selected)[0])
-        const wrapperClasses = computed(() => {
-            return {
-                [`gulu-direction-${props.direction}`]: props.direction
-            }
-        })
-        const navItemClasses = (title) => ({
-            [`gulu-tabs-nav-item-disabled`]: disabledItem[title],
-            ['selected']: title === props.selected,
-        })
-        const defaults = context.slots.default()
-        context.slots.default().forEach((tag) => {
-            if (tag.type !== Tab) {
-                throw new Error('Tabs的子组件必须是Tab组件')
-            }
-        })
-        const titles = context.slots.default().map(tag => {
-            return tag.props.title
-        })
+
+        const titles = context.slots.default().map(tag => tag.props.title)
         const select = (title: string) => {
             if (Object.keys(disabledItem).indexOf(title) >= 0) return
             context.emit('update:selected', title)
         }
+        const defaults = context.slots.default()
         return {
             titles,
             defaults,
