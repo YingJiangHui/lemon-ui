@@ -4,6 +4,7 @@
     <component :is="Demo" :component="Tabs1Demo" />
     <component :is="Demo" :component="Tabs2Demo" />
     <component :is="Demo" :component="Tabs3Demo" />
+
 </component>
 </template>
 

@@ -4,6 +4,8 @@
     <component :is="Demo" :component="Button1Demo" />
     <component :is="Demo" :component="Button4Demo" />
     <component :is="Demo" :component="Button5Demo" />
+    <span>下一节：</span>
+    <router-link to="/doc/dialog"><Button theme='link' size="large">Dialog 组件</Button></router-link>
 </component>
 </template>
 
