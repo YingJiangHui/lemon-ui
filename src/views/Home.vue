@@ -2,7 +2,10 @@
 <div class="topnavAndBanner">
     <Topnav />
     <div class="banner">
-        <h1>Lemon UI</h1>
+        <Icon class="icon" name="lemon2" />
+        <h1>
+            Lemon UI
+        </h1>
         <h2>一个厉害的UI框架</h2>
         <p class="actions">
             <a href="https://github.com/">GitHub</a>
@@ -40,9 +43,11 @@
 
 <script>
 import Topnav from '../components/Topnav.vue'
+import Icon from '../lib/Icon.vue'
 export default {
     components: {
-        Topnav
+        Topnav,
+        Icon
     }
 }
 </script>
@@ -51,6 +56,11 @@ export default {
 $button-color:#3cb54b;
 $font-color:#f8d912;
 $bg:#18332c;
+
+.icon {
+    height: 98px;
+    width: 98px;
+}
 
 .topnavAndBanner {
     background: $bg;
