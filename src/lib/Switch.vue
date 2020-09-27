@@ -72,7 +72,7 @@ $default-gb:#bfbfbf;
     }
 
     &.gulu-switch-checked>.gulu-ball {
-        left: calc(100% - #{$h2} - 2.5px);
+        left: calc(100% - #{$h2} - 2px);
     }
 
     &>.gulu-ball {
@@ -96,7 +96,7 @@ $default-gb:#bfbfbf;
     }
 
     &.gulu-switch-checked:active:not(.gulu-swtich-disabled)>.gulu-ball {
-        left: calc(100% - #{$h2} - 7.5px);
+        left: calc(100% - #{$h2} - 7px);
     }
 
     &:active:not(.gulu-swtich-disabled) {

@@ -2,11 +2,11 @@
 <div class="topnavAndBanner">
     <Topnav />
     <div class="banner">
-        <h1>轱辘UI</h1>
+        <h1>Lemon UI</h1>
         <h2>一个厉害的UI框架</h2>
         <p class="actions">
             <a href="https://github.com/">GitHub</a>
-            <router-link to='/doc'>开始</router-link>
+            <router-link to='/doc'>入门教程</router-link>
         </p>
     </div>
 </div>
@@ -48,40 +48,51 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$button-color:#02bcb0;
-$font-color:#12837f;
+$button-color:#3cb54b;
+$font-color:#f8d912;
+$bg:#18332c;
 
 .topnavAndBanner {
-    background: rgb(222, 252, 240);
-    background: linear-gradient(90deg, rgba(222, 252, 240, 1) 0%, rgba(191, 237, 234, 1) 100%);
-    clip-path: ellipse(80% 60% at 50% 40%);
+    background: $bg;
+    // background: rgb(222, 252, 240);
+    // background: linear-gradient(90deg, rgba(222, 252, 240, 1) 0%, rgba(191, 237, 234, 1) 100%);
+    // clip-path: ellipse(80% 60% at 50% 40%);
 }
 
 .banner {
-    padding: 100px 0;
+    padding: 150px 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 
-    &>h1,
+    &>h1 {
+        font-weight: bold;
+        color: $font-color;
+    }
+
     &>h2 {
-        color: #12837f;
+        color: #fff;
     }
 
     >.actions {
-        padding: 8px 0;
+        padding: 10px 0;
+        font-size: 16px;
 
         a {
+            font-size: inherit;
             $h: 36px;
-            padding: 0 1em;
+            padding: 0 25px;
             line-height: $h;
             height: $h;
-            color: #fff;
+            color: $font-color;
             margin: 0 8px;
-            background: $button-color;
             display: inline-block;
-            border-radius: 4px;
+        }
+
+        a:first-child {
+            color: $bg;
+            background: $font-color;
         }
     }
 }
@@ -127,6 +138,7 @@ $font-color:#12837f;
             }
 
             >p {
+                color: #6d6d6d;
                 grid-area: text
             }
         }

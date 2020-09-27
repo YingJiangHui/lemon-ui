@@ -71,17 +71,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$bg:#122520;
+
 .topnav {
     z-index: 10;
     display: flex;
     padding: 16px;
     align-items: center;
     position: fixed;
-    background: #fff;
-    border-bottom: 1px solid rgb(0, 0, 0, .1);
+    background: $bg;
     top: 0;
     left: 0;
     width: 100%;
+    $font-color: #f8d912;
 
     >.logo {
         max-width: 6em;
@@ -89,12 +91,13 @@ export default {
 
     }
 
-    .icon {
-        width: 24px;
-        height: 24px;
+    .gulu-icon {
+        width: 26px;
+        height: 26px;
     }
 
     >.menu {
+        color: $font-color;
         display: flex;
         white-space: nowrap;
         flex-wrap: nowrap;
@@ -106,17 +109,21 @@ export default {
 
     >.toggleAside {
         cursor: pointer;
-        width: 30px;
-        height: 30px;
         display: none;
+
+        &>.gulu-icon {
+            fill: $font-color;
+        }
     }
 
     @media (max-width:500px) {
+
         >.menu {
             display: none;
         }
 
         >.logo {
+
             position: absolute;
             left: 50%;
             top: 50%;

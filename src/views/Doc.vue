@@ -2,35 +2,37 @@
 <div class="layout">
     <Topnav class="nav" :toggleMenuButtonVisible='true' />
     <div class="content">
-        <aside v-if="menuVisible" ref='asideRef'>
-            <h2>文档</h2>
-            <ol>
-                <li>
-                    <router-link tag="li" to="/doc/intro">介绍</router-link>
-                </li>
-                <li>
-                    <router-link tag="li" to="/doc/install">安装</router-link>
-                </li>
-                <li>
-                    <router-link tag="li" to="/doc/get-started">开始使用</router-link>
-                </li>
-            </ol>
-            <h2>组件列表</h2>
-            <ol>
-                <li>
-                    <router-link to="/doc/switch">Switch 组件</router-link>
-                </li>
-                <li>
-                    <router-link to="/doc/button">Button 组件</router-link>
-                </li>
-                <li>
-                    <router-link to="/doc/dialog">Dialog 组件</router-link>
-                </li>
-                <li>
-                    <router-link to="/doc/tabs">Tabs 组件</router-link>
-                </li>
-            </ol>
-        </aside>
+        <transition name="fade">
+            <aside v-if="menuVisible" ref='asideRef'>
+                <h2>文档</h2>
+                <ol>
+                    <li>
+                        <router-link tag="li" to="/doc/intro">介绍</router-link>
+                    </li>
+                    <li>
+                        <router-link tag="li" to="/doc/install">安装</router-link>
+                    </li>
+                    <li>
+                        <router-link tag="li" to="/doc/get-started">开始使用</router-link>
+                    </li>
+                </ol>
+                <h2>组件列表</h2>
+                <ol>
+                    <li>
+                        <router-link to="/doc/switch">Switch 组件</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/doc/button">Button 组件</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/doc/dialog">Dialog 组件</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/doc/tabs">Tabs 组件</router-link>
+                    </li>
+                </ol>
+            </aside>
+        </transition>
         <main>
             <router-view />
         </main>
@@ -60,6 +62,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$aside-padding:24px;
+$bg:#3cb54b;
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease, top 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    top: -30px;
+    opacity: 0;
+}
+
 .layout {
     display: flex;
     flex-direction: column;
@@ -72,7 +88,7 @@ export default {
     >.content {
         flex-grow: 1;
         padding-top: 60px;
-        padding-left: 156px;
+        padding-left: 300px;
 
         @media (max-width: 500px) {
             padding-left: 0;
@@ -95,32 +111,57 @@ export default {
 
 aside {
     z-index: 1;
-    background: #bfedea;
-    width: 150px;
-    padding: 70px 0 0 0;
+    background: rgb(247, 247, 247);
+    width: 300px;
+    padding: 70px 24px 0 30px;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
+    border-right: 1px solid #ececec;
+
+    >.aside-inner {
+        position: relative;
+    }
 
     >h2 {
-        padding: 0 16px;
-        margin-bottom: 4px;
+        font-size: 18px;
+        padding: 5px 0;
     }
 
     >ol {
         >li {
+
             >a {
+                font-size: 14px;
+                padding: 3px 0;
+                color: #6d6d6d;
                 border: none;
                 text-decoration: none;
-                padding: 4px 16px;
                 display: block;
             }
 
-            >a.router-link-active {
-
-                background: #fff;
+            a:hover {
+                color: #1a1a1a;
             }
+
+            >a.router-link-active {
+                border-right: 4px solid $bg;
+                color: #000;
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    aside {
+        width: 100%;
+        padding-left: 24px;
+        padding-right: 24px;
+
+        >ol>li>a.router-link-active {
+            color: $bg;
+            border: none;
         }
     }
 }
