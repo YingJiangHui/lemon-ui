@@ -88,7 +88,6 @@ $bg:#122520;
     >.logo {
         max-width: 6em;
         margin-right: auto;
-
     }
 
     .gulu-icon {
@@ -110,8 +109,11 @@ $bg:#122520;
     >.toggleAside {
         cursor: pointer;
         display: none;
+        margin-right: -26px;
 
         &>.gulu-icon {
+            width: 26px;
+            height: 26px;
             fill: $font-color;
         }
     }
@@ -123,14 +125,11 @@ $bg:#122520;
         }
 
         >.logo {
-
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%)
+            margin: 0 auto;
         }
 
         >.toggleAside {
+
             display: block;
         }
     }
