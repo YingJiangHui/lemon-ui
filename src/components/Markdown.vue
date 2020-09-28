@@ -8,21 +8,11 @@ import {
 } from 'vue'
 export default {
     props: {
-        path: {
+        content: {
             type: String,
             required: true
         }
     },
-    setup(props) {
-        const content = ref < string > (null)
-        import(props.path).then((data) => {
-            content.value = data.default
-        }).catch((err) => {
-            console.log(err)
-        })
-        return {
-            content
-        }
-    }
+
 }
 </script>
