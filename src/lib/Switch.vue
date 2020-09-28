@@ -1,5 +1,5 @@
 <template>
-<button class="gulu-button" @click="toggle" :class="classes"><span class="gulu-ball"></span></button>
+<button class="gulu-switch" @click="toggle" :class="classes"><span class="gulu-ball"></span></button>
 </template>
 
 <script lang="ts">
@@ -47,7 +47,7 @@ $h2: $h - 4px;
 $gb:dodgerblue;
 $default-gb:#bfbfbf;
 
-.gulu-button {
+.gulu-switch {
 
     border: none;
     background: $default-gb;
@@ -58,6 +58,7 @@ $default-gb:#bfbfbf;
     transition: box-shadow 500ms;
     height: $h;
     width: $h * 2;
+    cursor: pointer;
 
     &.gulu-switch-disabled {
         background: fade-out($color: $default-gb, $amount: 0.5);
