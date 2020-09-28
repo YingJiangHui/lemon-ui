@@ -3,11 +3,14 @@
 
 然后在你的代码中写入下面的代码
 
+引入组件
 ```
-import {Button, Tabs, Switch, Dialog,Icon,showDialog} from "lemon-ui-lib"
+import {Button, Tabs, Switch, Dialog,Icon,openDialog} from "lemon-ui-lib"
 ```
-
-就可以使用我提供的组件了。
+引入css
+```
+import 'lemon-ui-lib/dist/lib/lemon.css'
+```
 
 ## Vue 单文件组件
 
@@ -20,6 +23,7 @@ import {Button, Tabs, Switch, Dialog,Icon,showDialog} from "lemon-ui-lib"
   </div>
 </template>
 <script>
+import 'lemon-ui-lib/dist/lib/lemon.css'
 import {Button, Tabs, Switch, Dialog} from "lemon-ui-lib"
 export default {
   components: {Button}
