@@ -26,7 +26,7 @@ export default {
             return {
                 [`gulu-switch-size-${props.size}`]: true,
                 [`gulu-switch-checked`]: props.value,
-                [`gulu-swtich-disabled`]: props.disabled
+                [`gulu-switch-disabled`]: props.disabled
             }
         })
         const toggle = () => {
@@ -59,14 +59,14 @@ $default-gb:#bfbfbf;
     height: $h;
     width: $h * 2;
 
-    &.gulu-swtich-disabled {
+    &.gulu-switch-disabled {
         background: fade-out($color: $default-gb, $amount: 0.5);
     }
 
     &.gulu-switch-checked {
         background: dodgerblue;
 
-        &.gulu-swtich-disabled {
+        &.gulu-switch-disabled {
             background: fade-out($color: $gb, $amount: 0.5);
         }
     }
@@ -91,20 +91,20 @@ $default-gb:#bfbfbf;
 
     }
 
-    &:active:not(.gulu-swtich-disabled)>.gulu-ball {
+    &:active:not(.gulu-switch-disabled)>.gulu-ball {
         width: $h2+5px;
     }
 
-    &.gulu-switch-checked:active:not(.gulu-swtich-disabled)>.gulu-ball {
+    &.gulu-switch-checked:active:not(.gulu-switch-disabled)>.gulu-ball {
         left: calc(100% - #{$h2} - 7px);
     }
 
-    &:active:not(.gulu-swtich-disabled) {
+    &:active:not(.gulu-switch-disabled) {
         transition: none;
         box-shadow: 0 0 0 0 rgba(30, 144, 255, .5);
     }
 
-    &.gulu-swtich-disabled {
+    &.gulu-switch-disabled {
         cursor: not-allowed;
     }
 
@@ -124,11 +124,11 @@ $default-gb:#bfbfbf;
             left: calc(100% - #{$h2} - 2px);
         }
 
-        &:active:not(.gulu-swtich-disabled)>.gulu-ball {
+        &:active:not(.gulu-switch-disabled)>.gulu-ball {
             width: $h2 + 4px;
         }
 
-        &.gulu-switch-checked:active:not(.gulu-swtich-disabled)>.gulu-ball {
+        &.gulu-switch-checked:active:not(.gulu-switch-disabled)>.gulu-ball {
             left: calc(100% - #{$h2} - 6px);
         }
 
