@@ -6,9 +6,9 @@
         <h1>
             Lemon UI
         </h1>
-        <h2>一个厉害的UI框架</h2>
+        <h2>一个像柠檬一样酸爽的UI框架 ~</h2>
         <p class="actions">
-            <a href="https://github.com/">GitHub</a>
+            <a href="https://github.com/YingJiangHui/lemon-ui">GitHub</a>
             <router-link to='/doc'>入门教程</router-link>
         </p>
     </div>
@@ -87,10 +87,9 @@ $bg:#18332c;
 
     >.actions {
         padding: 10px 0;
-        font-size: 16px;
 
         a {
-            font-size: inherit;
+            font-size: 16px;
             $h: 36px;
             padding: 0 25px;
             line-height: $h;
@@ -98,12 +97,20 @@ $bg:#18332c;
             color: $font-color;
             margin: 0 8px;
             display: inline-block;
+            transition: color .25s,background-color .25s;
+            &:hover{
+                color: #fff;
+            }
         }
 
         a:first-child {
             color: $bg;
             background: $font-color;
+            &:hover{
+                background: #fff;
+            }
         }
+
     }
 }
 
