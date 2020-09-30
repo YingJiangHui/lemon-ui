@@ -2,8 +2,7 @@
 修改大小
 </demo>
 <template>
-<Switch v-model:value="bool1" />
-<Switch v-model:value="bool2" size="small" />
+<Switch v-model:value="bool1" /> <Switch v-model:value="bool2" size="small" />
 </template>
 
 <script lang="ts">
