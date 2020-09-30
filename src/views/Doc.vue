@@ -4,7 +4,7 @@
     <div class="content">
         <transition name="fade">
             <aside v-if="menuVisible" ref='asideRef'>
-                <h2>文档</h2>
+                <h2>基础</h2>
                 <ol>
                     <li>
                         <router-link tag="li" to="/doc/intro">介绍</router-link>
@@ -16,7 +16,7 @@
                         <router-link tag="li" to="/doc/get-started">开始使用</router-link>
                     </li>
                 </ol>
-                <h2>组件列表</h2>
+                <h2>组件</h2>
                 <ol>
                     <li>
                         <router-link to="/doc/switch">Switch 开关</router-link>

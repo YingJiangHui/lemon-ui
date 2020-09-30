@@ -131,6 +131,8 @@ $bg:#18332c;
         flex-wrap: wrap;
 
         >li {
+            padding-left: 20px;
+            padding-right: 20px;
             width: 400px;
             min-width: 320px;
             margin: 16px 0;
