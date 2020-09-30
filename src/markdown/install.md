@@ -2,13 +2,13 @@
 
 打开终端运行下列命令：
 
-```
+```bash
 npm install lemon-ui-lib
 ```
 
 或
 
-```
+```bash
 yarn add lemon-ui-lib
 ```
 
